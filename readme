@@ -5,3 +5,8 @@ in un programmma 5 istruzioni: input, calcolo, controllo condizioni, ripetere, g
 2 comandi, statement e espressioni
 memoria libera se in un indirizzo non ho più postit
 is per vedere puntare a stessa area memoria
+
+git status
+git add .
+git statusgit commit -m "quel che vuoi"
+git push origin main
