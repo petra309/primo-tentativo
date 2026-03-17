@@ -6,7 +6,11 @@ in un programmma 5 istruzioni: input, calcolo, controllo condizioni, ripetere, g
 memoria libera se in un indirizzo non ho più postit
 is per vedere puntare a stessa area memoria
 
+q per uscire da hepl()
+
+
 git status
 git add .
-git statusgit commit -m "quel che vuoi"
+git status
+git commit -m "quel che vuoi"
 git push origin main
