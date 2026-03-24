@@ -7,8 +7,10 @@ memoria libera se in un indirizzo non ho più postit
 is per vedere puntare a stessa area memoria
 
 q per uscire da hepl()
+gggg.split
+\n divide linee vuol dire no line
 
-
+exit()
 git status
 git add .
 git status
