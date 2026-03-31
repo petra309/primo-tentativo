@@ -31,6 +31,8 @@ for riga in lista_righe:
 
 print(contatore)
 
+
+#parte 2 
 lista_parole = testo.split() 
 # testo.split('\n') DEVO AGGIUNGERE
 
@@ -49,18 +51,33 @@ print(contatore_parole)
 
 #PUNTO 3
 
-testo_lista = list(testo)
-testo_lista
+#testo_lista = list(testo)
+#testo_lista
 
 #print(testo_lista)
+lista_lettere = list(testo)
 
-carattere = 'a'
-alfanumerici = 'abc...'
+alfanumerici = 'abcdefghijklmnopqrstuvwxyzèéàòùABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-carattere in alfanumerici
+
+#carattere in alfanumerici
 #risponde true false
 
+contatore_lettere = 0
+for lettera in lista_lettere:
+    if lettera in alfanumerici:
+        contatore_lettere = contatore_lettere + 1
 
+print(contatore_lettere)
+
+#vedi se va bene con sotto cambia
+'''
+isalnum(self, /)
+ |      Return True if the string is an alpha-numeric string, False otherwise.
+ |
+ |      A string is alpha-numeric if all characters in the string are alpha-numeric and
+ |      there is at least one character in the string.
+'''
 #punto 8 
 
 #come specchiare

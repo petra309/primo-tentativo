@@ -6,9 +6,11 @@ in un programmma 5 istruzioni: input, calcolo, controllo condizioni, ripetere, g
 memoria libera se in un indirizzo non ho più postit
 is per vedere puntare a stessa area memoria
 
-q per uscire da hepl()
+q per uscire da help()
 gggg.split
 \n divide linee vuol dire no line
+
+ricorda context manager with    e commenti molto
 
 exit()
 git status

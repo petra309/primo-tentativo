@@ -1,3 +1,6 @@
+#ESERCIZIO 1
+
+#RISOLUZIONE PUNTO 1
 def is_pari(n) :
     """ Ritorna vero se "n" è pari,se no ritorna falso """
   
@@ -9,7 +12,9 @@ def is_pari(n) :
 
     return risultato
 ###
-main() :
+
+
+main()
 
 numero = int( input('Dammi un numero: ') )
 print(type(numero))
@@ -17,4 +22,8 @@ result = is_pari(numero)
 
 print(result)
 
-main()
+qqq
+
+
+#RISOLUZIONE PUNTO 2
+
