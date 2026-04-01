@@ -70,6 +70,21 @@ for lettera in lista_lettere:
 
 print(contatore_lettere)
 
+
+
+contatore_lettere = 0
+for lettera in lista_lettere:
+    if lettera.isalnum:
+        contatore_lettere = contatore_lettere + 1
+
+print(contatore_lettere)
+
+
+
+
+
+
+
 #vedi se va bene con sotto cambia
 '''
 isalnum(self, /)
@@ -78,6 +93,63 @@ isalnum(self, /)
  |      A string is alpha-numeric if all characters in the string are alpha-numeric and
  |      there is at least one character in the string.
 '''
+
+#PUNTO 4
+
+contatore_variabile = 0
+for variabile in lista_lettere:
+    if lettera == variabile:
+        contatore_variabile = contatore_variabile + 1
+
+print(contatore_variabile)
+
+#c'è qualcosa che non va pk non so come far chiedere la variabile
+
+
+#PUNTO 5
+
+ #Sostituite tutte le parole day, water e about con la parola PYTHON in tutti i versi
+
+
+
+cambio = {
+    "day": "banana"
+    #"water": PYTHON
+    #"about": PYTHON
+    #"Day": PYTHON
+    #"Water": PYTHON
+    #"About": PYTHON
+}
+
+for vecchio, nuovo in cambio :
+    testo = testo.repalce(vecchio, nuovo)
+
+print(testo)
+'''
+nuovo_testo = testo.replace("day", "PYTHON")
+testo.replace("water", "PYTHON")
+testo.replace("water", "PYTHON")
+
+
+print(nuovo_testo)
+#str.replace(vecchia, nuova): S
+'''
+'''
+python
+testo = "Il gatto mangia la mela sul tavolo."
+cambiamenti = {
+    "gatto": "cane",
+    "mela": "pera",
+    "tavolo": "divano"
+}
+
+for vecchia, nuova in cambiamenti.items():
+    testo = testo.replace(vecchia, nuova)
+
+'''
+
+
+
 #punto 8 
 
 #come specchiare
