@@ -120,3 +120,4 @@ for sol in range(10):
 
 #punto 3
 #Alcune soluzioni possono essere ripetute: fate in modo che le soluzioni siano “uniche”
+#ho foto di 14/4
