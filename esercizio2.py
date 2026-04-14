@@ -74,7 +74,7 @@ print(contatore_lettere)
 
 contatore_lettere = 0
 for lettera in lista_lettere:
-    if lettera.isalnum:
+    if lettera.isalnum():
         contatore_lettere = contatore_lettere + 1
 
 print(contatore_lettere)
@@ -113,16 +113,19 @@ print(contatore_variabile)
 
 
 cambio = {
-    "day": "banana"
-    #"water": PYTHON
-    #"about": PYTHON
-    #"Day": PYTHON
-    #"Water": PYTHON
-    #"About": PYTHON
+    "day": "PYTHON",
+    "water": "PYTHON",
+    "about": "PYTHON",
+    "Day": "PYTHON",
+    "Water": "PYTHON",
+    "About": "PYTHON"
 }
 
-for vecchio, nuovo in cambio :
-    testo = testo.repalce(vecchio, nuovo)
+# help upper lower
+
+
+for vecchio, nuovo in cambio.items() :
+    testo = testo.replace(vecchio, nuovo)
 
 print(testo)
 '''
