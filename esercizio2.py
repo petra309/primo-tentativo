@@ -70,7 +70,7 @@ for lettera in lista_lettere:
 
 print(contatore_lettere)
 
-
+#351 devono essere alfanumerici, 87  parole
 
 contatore_lettere = 0
 for lettera in lista_lettere:
