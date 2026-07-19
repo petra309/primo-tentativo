@@ -42,6 +42,32 @@ def generatore(n) :
             return generatore()
 
 
+def genera_intero_positivo():
+    """
+    Chiede all'utente un numero intero positivo e lo restituisce.
+    Continua a richiederlo se l'input non è valido (negativo, zero o non intero).
+    """
+    while True:
+        try:
+            valore = int(input("Inserisci un numero intero positivo (maggiore di 0): "))
+            if valore > 0:
+                return valore
+            else:
+                print("Errore: il numero deve essere maggiore di zero. Riprova.")
+        except ValueError:
+            print("Errore: devi inserire un numero intero valido. Riprova.")
+
+
+# 1. Generiamo il numero positivo dall'input dell'utente
+numero_utente = genera_intero_positivo()
+
+# 2. Controlliamo se è pari o dispari
+if is_pari(numero_utente):
+    print(f"Il numero {numero_utente} è pari!")
+else:
+    print(f"Il numero {numero_utente} è dispari!")
+
+
 
 
 """
