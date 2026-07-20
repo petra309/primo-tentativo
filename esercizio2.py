@@ -1,3 +1,17 @@
+'''
+#
+# File: esercizio2.py
+#
+# Author: Petra Zurini
+#
+# Date: 20/07/2026
+#
+# Version: 1.0
+#
+# Description: Programma risolutivo dell'esercizio 2, lezione 4
+#
+'''
+
 testo = '''
 Day after day, day after day,
 We stuck, nor breath nor motion;
@@ -19,11 +33,17 @@ The death-fires danced at night;
 The water, like a witch's oils,
 Burnt green, and blue and white.
 '''
-# Risolvendo parte 1 esercizio 2
+
+
+#RISOLUZIONE PUNTO 1
+"""
+Contate le righe non vuote che compongono l’estratto
+"""
 
 #divido il testo in base al carattere \n
 lista_righe = testo.split('\n')
 
+#conto le righe non vuote
 contatore = 0
 for riga in lista_righe:
     if len(riga) > 0:
@@ -31,30 +51,16 @@ for riga in lista_righe:
 
 print(contatore)
 
+
+#RISOLUZIONE PUNTO 2
 """
-# Dividiamo per riga e contiamo solo quelle che contengono testo
-righe_non_vuote = [riga for riga in testo.split('\n') if riga.strip()]
-
-print(f"Numero di righe non vuote: {len(righe_non_vuote)}")  # Output: 16
+Contate le parole che compongono l’estratto
 """
 
-
-
-
-
-
-
-
-
-#parte 2 
+#divido il testo per ogni parola
 lista_parole = testo.split() 
-# testo.split('\n') DEVO AGGIUNGERE
 
-
-#72 + 15 = 88
-
-#print (lista_parole)
-
+#conto le parole
 contatore_parole = 0
 for parola in lista_parole:
     if len(parola) > 0:
@@ -63,45 +69,15 @@ for parola in lista_parole:
 print(contatore_parole)
 
 
+#RISOLUZIONE PUNTO 3
 """
-# Rimuoviamo la punteggiatura principale per non falsare il conteggio
-punteggiatura = [",", ".", ";", ":", "!", "?", "\n"]
-testo_pulito = testo
-for carattere in punteggiatura:
-    testo_pulito = testo_pulito.replace(carattere, " ")
-
-# Dividiamo il testo in una lista di parole e contiamo quanti elementi ci sono
-parole = testo_pulito.split()
-print(f"Numero totale di parole: {len(parole)}")  # Output: 120
+Contate i caratteri alfanumerici che compongono l’estratto
 """
 
-
-
-
-
-#PUNTO 3
-
-#testo_lista = list(testo)
-#testo_lista
-
-#print(testo_lista)
+#trasformo testo in una lista
 lista_lettere = list(testo)
 
-alfanumerici = 'abcdefghijklmnopqrstuvwxyzèéàòùABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-
-
-#carattere in alfanumerici
-#risponde true false
-
-contatore_lettere = 0
-for lettera in lista_lettere:
-    if lettera in alfanumerici:
-        contatore_lettere = contatore_lettere + 1
-
-print(contatore_lettere)
-
-#351 devono essere alfanumerici, 87  parole
-
+#conto gli alfanumerici in testo
 contatore_lettere = 0
 for lettera in lista_lettere:
     if lettera.isalnum():
@@ -109,31 +85,25 @@ for lettera in lista_lettere:
 
 print(contatore_lettere)
 
+"""
+#posso anche farlo alternativamente così
 
+alfanumerici = 'abcdefghijklmnopqrstuvwxyzèéàòùABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
+contatore_lettere = 0
+for lettera in lista_lettere:
+    if lettera in alfanumerici:
+        contatore_lettere = contatore_lettere + 1
 
+print(contatore_lettere)
+"""
 
-
-
-#vedi se va bene con sotto cambia
-'''
-isalnum(self, /)
- |      Return True if the string is an alpha-numeric string, False otherwise.
- |
- |      A string is alpha-numeric if all characters in the string are alpha-numeric and
- |      there is at least one character in the string.
-
-
-# Contiamo solo i caratteri per cui c.isalnum() restituisce True
-caratteri_alfanumerici = sum(1 for c in testo if c.isalnum())
-
-print(f"Numero di caratteri alfanumerici: {caratteri_alfanumerici}")  # Output: 476
-
-
-'''
 
 #PUNTO 4
-
+"""
+Chiedere all’utente una lettera e contate quante volte compare nel testo
+"""
+####################################################arrivata qua
 contatore_variabile = 0
 for variabile in lista_lettere:
     if lettera == variabile:
