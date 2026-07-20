@@ -172,3 +172,200 @@ else:
     print("Nessun nome specificato. Stampa per tutta la rubrica:\n" + "-"*50)
     for nome, dati in rubrica.items():
         stampa_messaggio(nome, dati)
+"""
+
+==========================================
+    # ESECUZIONE PUNTO 5 (Spostato da sys.argv ad argparse)
+    # =========================================================================
+    if args.cerca_chiave:
+        print(
+            f"\n--- ESECUZIONE PUNTO 5: Valori per la chiave '{args.cerca_chiave}' ---"
+        )
+        for nome, dati in rubrica.items():
+            print(f"  - {nome}: {dati[args.cerca_chiave]}")
+
+# punto 7
+
+if args.nome:
+        print(f"\n--- ESECUZIONE PUNTO 6: Filtro auguri per '{args.nome}' ---")
+        if args.nome in rubrica:
+            stampa_messaggio_auguri(args.nome, rubrica[args.nome])
+        else:
+            print(f"Errore: Il nome '{args.nome}' non è presente in rubrica.")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+import argparse
+import sys
+
+# Dizionario di partenza fornito
+rubrica = {
+    "Paolino Paperino": {
+        "giorno": 9,
+        "mese": "giugno",
+        "anno": 1934,
+        "età": 93,
+        "sesso": "M",
+        "mail": "paolino.paperin0@disney.org",
+    },
+    "Ron Weasley": {
+        "giorno": 1,
+        "mese": "marzo",
+        "anno": 1980,
+        "età": 46,
+        "sesso": "M",
+        "mail": "ron_weasley80@hogwards.uk",
+    },
+    "Ramona Flowers": {
+        "giorno": 19,
+        "mese": "ottobre",
+        "anno": 2004,
+        "età": 22,
+        "sesso": "F",
+        "mail": "ramona.fls@gmail.com",
+    },
+    "Madoka Ayukawa": {
+        "giorno": 25,
+        "mese": "maggio",
+        "anno": 1969,
+        "età": 57,
+        "sesso": "F",
+        "mail": "madoka_sax@asahi_net.jp",
+    },
+}
+
+
+# --- FUNZIONE AUSILIARIA PER IL PUNTO 4 ---
+def stampa_messaggio_auguri(nome, dati):
+    """Genera e stampa il messaggio personalizzato in base al sesso."""
+    desinenza = "o" if dati["sesso"] == "M" else "a"
+    messaggio = (
+        f"Car{desinenza} {nome}, sei nat{desinenza} il {dati['giorno']} di "
+        f"{dati['mese']} del {dati['anno']} e quindi a breve compirai {dati['età']} anni. "
+        f"Ti manderemo gli auguri a {dati['mail']}"
+    )
+    print(messaggio)
+
+
+def main():
+    # =========================================================================
+    # PUNTO 1: Visualizzazione formattata del dizionario annidato
+    # =========================================================================
+    print("--- PUNTO 1: Contenuto della rubrica ---")
+    for nome, dati in rubrica.items():
+        # Creiamo una lista di stringhe 'chiave' valore per i dati interni
+        dettagli = [f"'{k}' {repr(v)}" for k, v in dati.items()]
+        # Uniamo il nome con i suoi dettagli
+        print(f"'{nome}', " + ", ".join(dettagli))
+
+    # =========================================================================
+    # PUNTO 2 & 3: Liste delle età, ordinamenti e inversione
+    # =========================================================================
+    print("\n--- PUNTO 2 & 3: Analisi dell'età ---")
+
+    # Ordiniamo i nomi in base all'età contenuta nel dizionario interno
+    nomi_ordinati_eta = sorted(rubrica.keys(), key=lambda x: rubrica[x]["età"])
+
+    # Creiamo la lista delle età in ordine crescente
+    eta_crescente = [rubrica[nome]["età"] for nome in nomi_ordinati_eta]
+    print(f"Lista delle età (crescente): {eta_crescente}")
+
+    print("Nomi in ordine crescente di età:")
+    for nome in nomi_ordinati_eta:
+        print(f"  - {nome} ({rubrica[nome]['età']} anni)")
+
+    # PUNTO 3: Invertiamo la lista precedentemente costruita (ordine decrescente)
+    eta_decrescente = eta_crescente[::-1]
+    print(f"Lista delle età invertita (decrescente): {eta_decrescente}")
+
+    # =========================================================================
+    # PUNTO 4: Stampa del messaggio per OGNI membro
+    # =========================================================================
+    print("\n--- PUNTO 4: Messaggi di auguri per tutti ---")
+    for nome, dati in rubrica.items():
+        stampa_messaggio_auguri(nome, dati)
+
+    # =========================================================================
+    # PUNTO 5: Utilizzo di sys.argv (args posizionali da riga di comando)
+    # Per testarlo: python esercizio_rubrica.py mail
+    # =========================================================================
+    print("\n--- PUNTO 5: Ricerca valori tramite sys.argv ---")
+    # Verifichiamo se è stato passato almeno un argomento posizionale oltre al nome del file
+    if len(sys.argv) > 1:
+        chiave_cercata = sys.argv[1]
+        # Validiamo che la chiave esista in uno dei record di esempio
+        if chiave_cercata in [
+            "giorno",
+            "mese",
+            "anno",
+            "età",
+            "sesso",
+            "mail",
+        ]:
+            print(
+                f"Valori corrispondenti alla chiave '{chiave_cercata}' (da sys.argv):"
+            )
+            for nome, dati in rubrica.items():
+                print(f"  - {nome}: {dati[chiave_cercata]}")
+        else:
+            print(
+                f"Nota: '{chiave_cercata}' non è una chiave valida per la ricerca posizionale."
+            )
+    else:
+        print(
+            "Nessun argomento posizionale fornito a sys.argv. (Es: esegui 'python esercizio_rubrica.py mail')"
+        )
+
+    # =========================================================================
+    # PUNTO 6: Utilizzo di argparse per filtrare il Punto 4 sul nome
+    # Per testarlo: python esercizio_rubrica.py --nome "Madoka Ayukawa"
+    # =========================================================================
+    print("\n--- PUNTO 6: Filtro Argparse per nome ---")
+    parser = argparse.ArgumentParser(
+        description="Filtra il messaggio di auguri per un nome specifico."
+    )
+    parser.add_argument(
+        "--nome",
+        type=str,
+        help="Il nome del membro della rubrica di cui stampare il messaggio del punto 4",
+    )
+
+    # Nota: usiamo parse_known_args() per evitare conflitti con l'argomento posizionale del punto 5
+    args, _ = parser.parse_known_args()
+
+    if args.nome:
+        if args.nome in rubrica:
+            print(f"Esecuzione Punto 4 SOLO per l'opzione --nome '{args.nome}':")
+            stampa_messaggio_auguri(args.nome, rubrica[args.nome])
+        else:
+            print(f"Errore: Il nome '{args.nome}' non è presente in rubrica.")
+    else:
+        print(
+            "Opzione --nome non utilizzata. (Es: esegui 'python esercizio_rubrica.py --nome \"Madoka Ayukawa\"')"
+        )
+
+
+if __name__ == "__main__":
+    main()
+"""    
