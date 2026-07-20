@@ -1,111 +1,90 @@
-#ESERCIZIO 1
-#introduzione
-
 '''
 #
-# File: Programma.py
+# File: esercizio1.py
 #
-# Author: E.Romelli, D.Tavagnacco
+# Author: Petra Zurini
 #
-# Date: 2026/03/03
+# Date: 20/07/2026
 #
 # Version: 1.0
 #
-# Description: My First Project Program to print "Hello, World!".
+# Description: Programma risolutivo dell'esercizio 1, lezione 3
 #
 '''
 
-
-
 #RISOLUZIONE PUNTO 1
-# consegna magari aggiungi
-
+"""
+Scrivete una funzione di controllo, is_pari(n), che accetti come parametro un numero intero e 
+restituisca True se il numero è pari, False altrimenti.
+"""
 
 def is_pari(n) :
-    """ Ritorna vero se "n" è pari, se no ritorna falso """
+    """ Ritorna vero se "n" è pari, falso se "n" è dispari """
   
     risultato = False
 
+    #con divisione per due controllo se è pari
     if n%2 == 0 :
         #% da resto divisione
         risultato = True
-
+    
     return risultato
-###
+    
 
 #RISOLUZIONE PUNTO 2
-def generatore(n) :
+"""
+Create una funzione di generazione che chieda all’utente un numero intero positivo e lo 
+restituisca come risultato della funzione. Se l’utente inserisce un numero non valido 
+(es. negativo o zero), il ciclo deve continuare a richiederlo finché l’input non è corretto.
+"""
+
+def generatore(messaggio = "Quanti numeri vuoi testare in totale?") :
     """ Se il numero è intero e positivo applica la funzione is_pari, richiedi numero se non"""
 
+    #ciclo finchè accettato il numero in input
     while True:
-        if type(int (n)) == int and n > 0 :
-            return is_pari(n) 
-
+        stringa_input = input("Inserisci un numero intero positivo: ")
+        
+        # con .isdigit controllo che sia int, con > 0 che sia positivo
+        if stringa_input.isdigit() and int(stringa_input) > 0:
+            return int(stringa_input)
+        
         else :
-            print("numero non accettabile, riprovare")
-            False
-            return generatore()
+            print("Errore: devi inserire un numero intero positivo valido")
 
+"""
+#se voglio solo generare un numero e controllare se è pari o dispari
 
-def genera_intero_positivo():
-    """
-    Chiede all'utente un numero intero positivo e lo restituisce.
-    Continua a richiederlo se l'input non è valido (negativo, zero o non intero).
-    """
-    while True:
-        try:
-            valore = int(input("Inserisci un numero intero positivo (maggiore di 0): "))
-            if valore > 0:
-                return valore
-            else:
-                print("Errore: il numero deve essere maggiore di zero. Riprova.")
-        except ValueError:
-            print("Errore: devi inserire un numero intero valido. Riprova.")
+#genero numero dall'input 
+numero_utente = generatore()
 
-
-# 1. Generiamo il numero positivo dall'input dell'utente
-numero_utente = genera_intero_positivo()
-
-# 2. Controlliamo se è pari o dispari
+#controlliamo se è pari o dispari
 if is_pari(numero_utente):
-    print(f"Il numero {numero_utente} è pari!")
+    print(f"Il numero {numero_utente} è pari")
 else:
-    print(f"Il numero {numero_utente} è dispari!")
+    print(f"Il numero {numero_utente} è dispari")
+"""
 
-
-
-#main()
-
-# 1. Chiediamo il numero all'utente
-numero = generatore(int (input('Dammi un numero: ')))
-
-result = generatore(numero)
-
-print(result)
-
-#RISOLUZIONE PUNTO 2
-
-# punto tree
+#RISOLUZIONE PUNTO 3
 """
 Scrivete una funzione che usando il numero scelto dall’utente, generi una lista seguendo 
-questa regola: se il numero è pari, va diviso per 2; se è dispari, va moltiplicato per 3 
-e aggiunto 1. Il processo va ripetuto finchè si arriva a 1 o la lista abbia piu’ di 100 
-numeri
+questa regola: se il numero è pari, va diviso per 2; se è dispari, va moltiplicato per 3 e 
+aggiunto 1. Il processo va ripetuto finchè si arriva a 1 o la lista abbia piu’ di 100 numeri
 """
-def generazione_lista() :
-#def genera_sequenza_collatz(n):
-    """
-    Genera una lista di numeri partendo da n seguendo la regola di Collatz.
-    Si ferma quando arriva a 1 o quando la lista supera i 100 elementi.
-    """
-    # Inizializziamo la lista inserendo il numero di partenza scelto dall'utente
+
+def generazione_lista(n) :
+    """ Genera una lista partendo dall'input dell'utente, se input pari divido per due, se dispari
+    moltiplico per 3 e aggiungo 1 finchè non ottengo 1 o la lista supera i 100 elementi """
+
+    #creo lista con input dall'utente
     lista = [n]
     
-    # Il ciclo continua finché l'ultimo numero inserito non è 1 
-    # E finché la lunghezza della lista è inferiore a 100
+    #ciclo finché ottengo 1 lunghezza della lista è inferiore a 100
     while n != 1 and len(lista) < 100:
+        #se pari
         if is_pari(n):
             n = n // 2  # Usiamo la divisione intera per mantenere il tipo int
+        #se dispari
         else:
             n = n * 3 + 1
         
@@ -114,19 +93,17 @@ def generazione_lista() :
     return lista
 
 
-#punto 4
+#RISOLUZIONE PUNTO 4
+"""
+Scrivete una funzione analizza_sequenza(lista) che riceva la lista generata e restituisca tre 
+valori: il valore massimo raggiunto, la lunghezza della sequenza e la somma di tutti i numeri.
+"""
 
-"""
-Scrivete una funzione analizza_sequenza(lista) che riceva la lista generata e restituisca
- tre valori: il valore massimo raggiunto, la lunghezza della sequenza e la somma di tutti 
- i numeri.
-"""
 def analizza_sequenza(lista) :
-    # Se per qualche motivo la lista fosse vuota, gestiamo il caso per evitare errori
-    #if not lista:
-    #    return 0, 0, 0
-        
-    if lista == [0]
+    """ Restituisce valore massimo, lunghezza sequenza e somma di tutti i numeri della lista"""
+     
+    #caso lista vuota 
+    if not lista:
         return 0, 0, 0
 
     massimo = max(lista)
@@ -136,122 +113,85 @@ def analizza_sequenza(lista) :
     return massimo, lunghezza, somma
 
 
-#risoluzione punto 5
+#RISOLUZIONE PUNTO 5
+"""
+Scrivete una funzione ricerca(lista) che scorra la lista e stampi solo i numeri della sequenza 
+che sono divisibili per 5. Se non ce ne sono, va stampato un messaggio dedicato.
+"""
 
 def ricerca(lista) :
-# che scorra la lista e stampi solo i numeri della sequenza che sono divisibili per 5. Se non ce ne sono, va stampato un messaggio dedicato.
+    """ Stampa numeri della lista divisibili per 5 """
+
+    #scorro la lista e stampo solo i numeri divisibili per 5
     for i in lista:
-        #i elemento lista punto 3
         if i%5 == 0 :
             
-            print(i)
-            print(f"Numero divisibile per 5 trovato: {numero}")
+            print(f"Numero divisibile per 5 trovato: {i}")
 
-        else:
-            print("non ci sono numeri divisibili per 5")
-    #brake ???
+    #caso nessun numero divisibile per 5
+    print("non ci sono numeri divisibili per 5")
+    
 
-
-
-
-#risuluzione pumto 6 da rivedere bene tutto 
-
-# --- 1. FUNZIONI DI SUPPORTO (PUNTI PRECEDENTI) ---
-
-def is_pari(n):
-    """Restituisce True se il numero è pari, False altrimenti."""
-    return n % 2 == 0
-
-
-def genera_intero_positivo(messaggio="Inserisci un numero intero positivo: "):
-    """Chiede un intero positivo all'utente, continuando a oltranza in caso di input errato."""
-    while True:
-        try:
-            valore = int(input(messaggio))
-            if valore > 0:
-                return valore
-            print("Errore: il numero deve essere maggiore di zero.")
-        except ValueError:
-            print("Errore: inserisci un numero intero valido.")
-
-
-def genera_sequenza_collatz(n):
-    """Genera la sequenza applicando le regole fino a 1 o al limite di 100 elementi."""
-    sequenza = [n]
-    while n != 1 and len(sequenza) < 100:
-        if is_pari(n):
-            n = n // 2
-        else:
-            n = n * 3 + 1
-        sequenza.append(n)
-    return sequenza
-
-
-def analizza_sequenza(lista):
-    """Restituisce il valore massimo, la lunghezza e la somma degli elementi."""
-    if not lista:
-        return 0, 0, 0
-    return max(lista), len(lista), sum(lista)
-
-
-def ricerca(lista):
-    """Stampa i numeri divisibili per 5 o un messaggio se non ce ne sono."""
-    trovato = False
-    for numero in lista:
-        if numero % 5 == 0:
-            print(f"   -> Numero divisibile per 5 trovato: {numero}")
-            trovato = True
-    if not trovato:
-        print("   -> Nella sequenza non è presente alcun numero divisibile per 5.")
-
-
-# --- 2. MAIN PROGRAM ---
+#RISOLUZIONE PUNTO 6
+"""
+Unite il tutto in un main program che chieda all’inizio all’utente quanti numeri vuole testare.
+Usate uno o più loop per chiedere all’utente i numeri da analizzare e per eseguire i punti 
+precedenti per ogni numero. Alla fine stampate un riepilogo che mostri quale numero iniziale 
+ha generato la sequenza più lunga.
+""" 
 
 def main():
-    print("=== PROGRAMMA DI ANALISI DELLE SEQUENZE ===")
+    """ Con input utente eseguo tutte le altre funzioni. Trovo che numero ha generato la sequenza più 
+    lunga """
+
+    print("=== Inizio main program ===")
     
-    # Chiediamo quanti numeri totali l'utente vuole testare
-    quantita = genera_intero_positivo("Quanti numeri vuoi testare in totale? ")
+    #richiedo quanti numeri l'utente vuole testare
+    quantità = generatore("Quanti numeri vuoi testare in totale?")
     
-    # Variabili per tenere traccia della sequenza più lunga nel riepilogo
+    #variabili per tenere traccia della sequenza più lunga nel riepilogo
     miglior_numero_iniziale = None
     lunghezza_massima = -1
 
-    # Loop principale per elaborare ciascun numero
-    for i in range(1, quantita + 1):
-        print(f"\n--- ANALISI NUMERO {i} di {quantita} ---")
+    #ciclo principale per analizzare ogni numero
+    for i in range(1, quantità + 1):
+        print(f"\n--- Analizzo il numero {i} di {quantità} ---")
         
-        # Generazione dell'input valido per il test corrente
-        num_scelto = genera_intero_positivo(f"Inserisci il numero intero positivo n.{i}: ")
+        #chiedo input valido
+        numero_scelto = generatore(f"Inserisci il numero intero positivo n.{i}: ")
         
-        # 1. Generazione della sequenza
-        sequenza = genera_sequenza_collatz(num_scelto)
+        #genero la sequenza
+        sequenza = generazione_lista(numero_scelto)
         print(f"Sequenza generata: {sequenza}")
         
-        # 2. Analisi (Massimo, Lunghezza, Somma)
-        val_massimo, lung_sequenza, somma_totale = analizza_sequenza(sequenza)
+        #analizzo la sequenza (massimo, lunghezza, somma)
+        valore_massimo, lunghezza_sequenza, somma_totale = analizza_sequenza(sequenza)
         print(f"Risultati analisi:")
-        print(f"  - Lunghezza sequenza: {lung_sequenza}")
-        print(f"  - Valore massimo raggiunto: {val_massimo}")
+        print(f"  - Lunghezza sequenza: {lunghezza_sequenza}")
+        print(f"  - Valore massimo raggiunto: {valore_massimo}")
         print(f"  - Somma dei numeri: {somma_totale}")
         
-        # 3. Ricerca divisibili per 5
+        #ricerco i numeri divisibili per 5
         ricerca(sequenza)
         
-        # 4. Aggiornamento delle statistiche per il riepilogo finale
-        if lung_sequenza > lunghezza_massima:
-            lunghezza_massima = lung_sequenza
-            miglior_numero_iniziale = num_scelto
+        #aggiorno le statistiche per il riepilogo finale
+        if lunghezza_sequenza > lunghezza_massima:
+            lunghezza_massima = lunghezza_sequenza
+            miglior_numero_iniziale = numero_scelto
 
-    # --- 3. RIEPILOGO FINALE ---
-    print("\n================ RIEPILOGO ================")
+    
+    print("\n===  Riepilogo  ===")
+    
+    #indico che numero ha generato la sequenza più lunga
     if miglior_numero_iniziale is not None:
         print(f"Il numero iniziale che ha generato la sequenza più lunga è stato: {miglior_numero_iniziale}")
         print(f"Ha raggiunto una lunghezza totale di {lunghezza_massima} elementi.")
     else:
         print("Nessun numero è stato analizzato.")
-    print("===========================================")
 
-# Questo costrutto assicura che il main parta solo se il file viene eseguito direttamente
-if __name__ == "__main__":
-    main()
+
+#eseguo main()
+main()
+
+#rivedi def ricerca lista che stanpa troppe volte non trovato e 
+#generatore stampa frase sbagliata
