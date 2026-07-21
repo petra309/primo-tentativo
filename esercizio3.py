@@ -1,4 +1,16 @@
-
+'''
+#
+# File: esercizio3.py
+#
+# Author: Petra Zurini
+#
+# Date: 20/07/2026
+#
+# Version: 1.0
+#
+# Description: Programma risolutivo dell'esercizio 3, lezione 5
+#
+'''
 
 rubrica = {
   'Paolino Paperino': {'giorno': 9,
@@ -16,8 +28,29 @@ rubrica = {
 'Ramona Flowers': {'giorno': 19, 'mese': 'ottobre', 'anno': 2004, 'età': 22, 'sesso': 'F', 'mail': 'ramona.fls@gmail.com'},
 'Madoka Ayukawa': {'giorno': 25, 'mese': 'maggio', 'anno': 1969, 'età': 57, 'sesso': 'F', 'mail': 'madoka_sax@asahi_net.jp'}
 }
-#parte 1
-print (rubrica)
+
+
+#RISOLUZIONE PUNTO 1
+"""
+Partendo dal dizionario annidato rubrica visualizzate il contenuto del dizionario stampando 
+a schermo delle stringhe formattate che contengano la chiave ed il valor di ognuno degli 
+elementi(Esempio: ‘Paolino Paperino’, ‘giorno’ 9, ‘mese’ ‘giugno’, …)
+"""
+
+#ciclo per ciascun contatto nella rubrica
+for nome, dati in rubrica.items():
+    #preparo lista di stringhe formattate del tipo: 'chiave' valore
+    dettagli = []
+    for chiave, valore in dati.items():
+        #se il valore è una stringa aggiungiamo i singoli apici, altrimenti stampiamo il numero
+        valore_formattato = f"'{valore}'" if isinstance(valore, str) else valore
+        dettagli.append(f"'{chiave}' {valore_formattato}")
+
+    #unisco e separo con virgola
+    stringa_dettagli = ", ".join(dettagli)
+
+    #stampo il nome del contatto e la sua scheda
+    print(f"'{nome}', {stringa_dettagli}")
 
 
 #parte 2

@@ -99,242 +99,203 @@ print(contatore_lettere)
 """
 
 
-#PUNTO 4
+#RISOLUZIONE PUNTO 4
 """
 Chiedere all’utente una lettera e contate quante volte compare nel testo
 """
-####################################################arrivata qua
-contatore_variabile = 0
-for variabile in lista_lettere:
-    if lettera == variabile:
-        contatore_variabile = contatore_variabile + 1
 
-print(contatore_variabile)
-
-#c'è qualcosa che non va pk non so come far chiedere la variabile
-"""
-# Chiediamo all'utente di inserire una lettera
+#chiedo la lettera da contare
 lettera = input("Inserisci una lettera da cercare nel testo: ")
 
-# Ci assicuriamo che l'utente abbia inserito un solo carattere ed effettivamente una lettera
+#controllo che sia una lettera
 if len(lettera) == 1 and lettera.isalpha():
-    # Convertiamo tutto in minuscolo per un conteggio case-insensitive
+    #convertmo tutto in minuscolo
     conteggio = testo.lower().count(lettera.lower())
     
     print(f"La lettera '{lettera}' compare {conteggio} volte nel testo.")
 else:
     print("Errore: devi inserire un singolo carattere alfabetico.")
 
+
+#RISOLUZIONE PUNTO 5
+"""
+Sostituite tutte le parole day, water e about con la parola PYTHON in tutti i versi
 """
 
-
-#PUNTO 5
-
- #Sostituite tutte le parole day, water e about con la parola PYTHON in tutti i versi
-
-
-
-cambio = {
-    "day": "PYTHON",
-    "water": "PYTHON",
-    "about": "PYTHON",
-    "Day": "PYTHON",
-    "Water": "PYTHON",
-    "About": "PYTHON"
-}
-
-# help upper lower
-
-
-for vecchio, nuovo in cambio.items() :
-    testo = testo.replace(vecchio, nuovo)
-
-print(testo)
-'''
-nuovo_testo = testo.replace("day", "PYTHON")
-testo.replace("water", "PYTHON")
-testo.replace("water", "PYTHON")
-
-
-print(nuovo_testo)
-#str.replace(vecchia, nuova): S
-'''
-'''
-python
-testo = "Il gatto mangia la mela sul tavolo."
-cambiamenti = {
-    "gatto": "cane",
-    "mela": "pera",
-    "tavolo": "divano"
-}
-
-for vecchia, nuova in cambiamenti.items():
-    testo = testo.replace(vecchia, nuova)
-
-'''
-
-# Sostituiamo le parole (gestendo sia le maiuscole che le minuscole)
+#con .replace sostituisco le parole, sia maiuscole che minuscole
 testo_modificato = testo.replace("Day", "PYTHON").replace("day", "PYTHON")
 testo_modificato = testo_modificato.replace("Water", "PYTHON").replace("water", "PYTHON")
 testo_modificato = testo_modificato.replace("About", "PYTHON").replace("about", "PYTHON")
 
-# Stampiamo il risultato finale
+#stampo il risultato 
 print(testo_modificato)
 
 
-#punto 6
+#RISOLUZIONE PUNTO 6
+"""
+Riscrivete il testo in modo che tutte le parole in posizione dispari siano scritte in maiuscolo
+"""
 
+#preparo lista
 righe_modificate = []
 
-# Dividiamo il testo in singole righe
+#divido il testo in singole righe
 for riga in testo.split("\n"):
     parole = riga.split()
     nuove_parole = []
 
-    # Usiamo enumerate partendo da 1 per tracciare la posizione delle parole
+    #traccio posizione con enumerate, funzione che cicla la seguenza
     for indice, parola in enumerate(parole, start=1):
         if indice % 2 != 0:
-            # Posizione dispari (1°, 3°, 5°...): tutto in maiuscolo
+            #tutte le posizione dispari le metto in maiuscolo
             nuove_parole.append(parola.upper())
         else:
-            # Posizione pari: lasciamo la parola com'è
+            #tutte le posizione pari lascio com'è
             nuove_parole.append(parola)
 
     # Ricomponiamo la riga unendo le parole con uno spazio
     righe_modificate.append(" ".join(nuove_parole))
 
-# Uniamo tutte le righe modificate per ricreare il testo finale
+#ricostriusco testo con a capo
 testo_finale = "\n".join(righe_modificate)
 print(testo_finale)
 
 
+#RISOLUZIONE PUNTO 7
+"""
+Riscrivere il testo invertendo l’ordine delle frasi dal basso all’alto.
+"""
 
-#punto 7
-
-#forse non serve
-# Dividiamo il testo in una lista di righe
+#divido il testo in una lista di righe
 righe = testo.split("\n")
 
-# Invertiamo l'ordine delle righe dall'ultima alla prima
+#inverto l'ordine delle righe dall'ultima alla prima
 righe_invertite = righe[::-1]
 
-# Ricomponiamo il testo unendo le righe invertite con un a capo
+#ricostriusco testo con a capo
 testo_finale = "\n".join(righe_invertite)
 print(testo_finale)
 
 
+#RISOLUZIONE PUNTO 8 
+"""
+Riscrivete il testo in modo che il secondo verso di ogni strofa sia scritto a specchio (cioè 
+al contrario carattere per carattere: Ad esempio, questa frase’ –> ‘esarf atseuq ,oipmese dA’)
+"""
 
+#separo in strofe usando i doppi a capo (\n\n)
+strofe = testo.split("\n\n")
 
+#preparo lista 
+strofe_modificate = []
 
+#separo in versi
+for strofa in strofe:
+    versi = strofa.split("\n")
+    versi_modificati = []
 
+    #uso enumerate() per accedere sia all'indice (i) che al verso
+    for i, verso in enumerate(versi):
+        #il secondo verso ha indice 1 (in Python si parte da 0)
+        if i == 1:
+            #[::-1] inverte la stringa carattere per carattere
+            verso_a_specchio = verso[::-1]
+            versi_modificati.append(verso_a_specchio)
+        else:
+            versi_modificati.append(verso)
 
-#punto 8 
+    #ricostriusco strofa unendo i versi con un a capo
+    strofe_modificate.append("\n".join(versi_modificati))
 
-#come specchiare
+#ricostruisco testo modificato
+testo_finale = "\n\n".join(strofe_modificate)
 
-#print(lista_righe)
-#lista_righe[01]
-
-#forse non serve vedi se usare questo o gem
-for indice in [2, 7, 12, 17]:
-    lista_prima_riga = list(lista_righe[indice])
-    print (lista_prima_riga)
-
-
-# Dividiamo il testo in una lista di versi
-versi = testo.split("\n")
-versi_modificati = []
-
-# Iteriamo sui versi a blocchi di 4 (uno per ogni strofa)
-for i in range(0, len(versi), 4):
-    # Prendiamo i 4 versi della strofa corrente
-    strofa = versi[i:i+4]
-    
-    # Il secondo verso della strofa (indice 1 del blocco) viene invertito a specchio
-    strofa[1] = strofa[1][::-1]
-    
-    # Aggiungiamo i versi della strofa alla nostra lista finale
-    versi_modificati.extend(strofa)
-
-# Ricomponiamo il testo finale
-testo_finale = "\n".join(versi_modificati)
+#stampo risultato
 print(testo_finale)
 
 
-# punto 9
+#RISOLUZIONE PUNTO 9
+"""
+Trovate eventuali parole che compaiono in tutte le strofe
+"""
 
-
+#modulo per lavorare con pattern
 import re
 
-# 1. Dividiamo il testo in linee ed eliminiamo eventuali righe vuote
+#divido in versi non vuoti
 versi = [linea for linea in testo.split("\n") if linea.strip()]
 
-# 2. Raggruppiamo i versi in strofe (4 versi per ogni strofa)
+#raggruppo in strofe
 strofe = [versi[i : i + 4] for i in range(0, len(versi), 4)]
 
-# Lista che conterrà l'insieme delle parole di ciascuna strofa
+#preparo lista
 parole_per_strofa = []
 
+#ciclo per ogni strofa
 for strofa in strofe:
-    # Uniamo i 4 versi della strofa in un unico testo in minuscolo
+    #raggruppo i versi di una strofa e rendo tutto minuscolo
     testo_strofa = " ".join(strofa).lower()
 
-    # Usiamo le espressioni regolari (regex) per estrarre solo le parole,
-    # escludendo simboli di punteggiatura come virgole, punti e punti esclamativi
+    #uso re. per estrarre solo le parole, escludendo punteggiatura 
     parole = re.findall(r"\b\w+\b", testo_strofa)
 
-    # Convertiamo la lista di parole in un set (elimina i duplicati interni alla strofa)
+    #converto lista in set per eliminare doppioni
     parole_per_strofa.append(set(parole))
 
-# 3. Troviamo l'intersezione tra i set di tutte le strofe
-# (*parole_per_strofa "spacchetta" la lista passando i 4 set alla funzione intersection)
+#trovo l'intersezione tra i set di tutte le strofe
+#*parole_per_strofa "spacchetta" la lista passando i 4 set alla funzione intersection
 parole_comuni = set.intersection(*parole_per_strofa)
 
-# 4. Stampiamo il risultato richiesto
+#stampo il risultato 
 if parole_comuni:
-    print(
-        f"Le parole che compaiono in tutte le strofe sono: {', '.join(parole_comuni)}"
-    )
+    print(f"Le parole che compaiono in tutte le strofe sono: {', '.join(parole_comuni)}")
+    
 else:
     print("Nessuna parola compare in tutte le strofe.")
 
 
+#RISOLUZIONE PUNTO 10
+"""
+Create la lista univoca di tutte le parole che compaiono nel testo, ordinatela per lunghezza 
+delle parole e visualizzatela
+"""
 
-# punto 10000
-
+#modulo per lavorare con pattern
 import re
 
-# 1. Estraiamo tutte le parole convertendole in minuscolo
-#    e usiamo set() per eliminare automaticamente i duplicati
+#prendo tutte le parole in minuscolo e uso set() per eliminare doppioni
 parole_pulite = re.findall(r"\b\w+\b", testo.lower())
 parole_univoche = set(parole_pulite)
 
-# 2. Ordiniamo la lista di parole in base alla loro lunghezza (len)
-#    In caso di parità di lunghezza, Python le manterrà in ordine alfabetico naturale
+#ordino lista in base alla lunghezza (len)
 parole_ordinate = sorted(parole_univoche, key=len)
 
-# 3. Visualizziamo il risultato
+#stampo il risultato
 print(f"Ci sono in totale {len(parole_ordinate)} parole univoche.\n")
 print("Ecco la lista ordinata per lunghezza:")
 print(parole_ordinate)
 
 
-#punto  11
+#RISOLUZIONE PUNTO 11
+"""
+Create un dizionario che mappi OGNI carattere (chiave) con la sua occorrenza nel testo 
+(valore) e visualizzatelo
+"""
 
-# Creiamo un dizionario vuoto per memorizzare le occorrenze
+#creo dizionario vuoto per memorizzare le occorrenze
 mappa_caratteri = {}
 
-# Scorriamo il testo carattere per carattere
+#scorro il testo
 for carattere in testo:
     if carattere in mappa_caratteri:
         mappa_caratteri[carattere] += 1
     else:
         mappa_caratteri[carattere] = 1
 
-# Per visualizzarlo in modo ordinato e leggibile, stampiamo chiave e valore
+#stampo chiave e valore
 print("Mappatura completa dei caratteri e delle loro occorrenze:\n")
 for chiave, valore in sorted(mappa_caratteri.items()):
-    # Rappresentazione speciale per rendere visibili gli spazi e gli "a capo"
+    #rappresentazione speciale per rendere visibili gli spazi e gli "a capo"
     if chiave == " ":
         nome_chiave = "' ' (spazio)"
     elif chiave == "\n":
@@ -345,23 +306,29 @@ for chiave, valore in sorted(mappa_caratteri.items()):
     print(f"Carattere {nome_chiave:<15} -> Occorrenze: {valore}")
 
 
-#punto 12
+#RISOLUZIONE PUNTO 12
+"""
+Create un dizionario come il precedente per i soli caratteri alfanumerici (no caratteri speciali),
+ignorando maiuscole e minuscole
+"""
 
+#creo dizionario vuoto per memorizzare le occorrenze
 mappa_alfanumerici = {}
 
-# Convertiamo il testo in minuscolo prima di analizzarlo
+#converto il testo in minuscolo
 for carattere in testo.lower():
-    # Selezioniamo solo i caratteri alfanumerici (lettere e numeri)
+    #prendo solo alfanumerici
     if carattere.isalnum():
         if carattere in mappa_alfanumerici:
             mappa_alfanumerici[carattere] += 1
         else:
             mappa_alfanumerici[carattere] = 1
 
-# Visualizziamo il dizionario ordinato in modo leggibile
+#stampo i riusltati
 print("Mappatura dei soli caratteri alfanumerici (case-insensitive):\n")
 for chiave, valore in sorted(mappa_alfanumerici.items()):
     print(f"Carattere '{chiave}' -> Occorrenze: {valore}")
 
 
 
+# 9 più facile ???
