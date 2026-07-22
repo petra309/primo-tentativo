@@ -18,14 +18,23 @@ import json
 import sys
 
 
-#RISOLUZIONE PUNTO 1
+#RISOLUZIONE PUNTO 1 2 3 
 """
 Partendo dall’esercizio 3, aggiungete una opzione al programma per generare un file di testo 
 rubrica.txt contenente tutti gli elmenti della rubrica, uno per linea, con tutte le informazioni 
 separate da virgole. 
 """
 
-# Il dizionario di partenza della rubrica
+"""
+Create un file JSON che contiene la rubrica con la stessa struttura del dizionario interno al 
+programma
+"""
+
+"""
+Leggete la rubrica salvata in un file formato JSON e visualizzate tutto il contenuto
+"""
+
+#dizionario di partenza della rubrica
 rubrica = {
     "Paolino Paperino": {
         "giorno": 9,
@@ -70,7 +79,7 @@ def stampa_messaggio_auguri(nome, dati):
         f"Ti manderemo gli auguri a {dati['mail']}"
     )
 
-
+#riporto esercizio 3
 def main():
     parser = argparse.ArgumentParser(
         description="Programma di gestione Rubrica avanzato con esportazione TXT e JSON."
@@ -98,24 +107,28 @@ def main():
         help="Punto 4: Auguri a tutti i membri",
     )
 
-    #nuove opzioni richieste per file TXT e JSON
+    #opzione per file TXT del punto 1 
     parser.add_argument(
         "--esporta_txt",
         action="store_true",
         help="Esporta la rubrica in un file di testo 'rubrica.txt' separato da virgole",
     )
+
+    #opzione per file JSON del punto 2
     parser.add_argument(
         "--esporta_json",
         action="store_true",
         help="Esporta la rubrica in un file 'rubrica.json'",
     )
+
+    #opzione per leggere il file JSON del punto 3
     parser.add_argument(
         "--leggi_json",
         action="store_true",
         help="Legge il file 'rubrica.json' e ne visualizza il contenuto",
     )
 
-    # Opzioni parametriche
+    #opzioni parametriche
     parser.add_argument(
         "--cerca_chiave",
         type=str,
@@ -130,7 +143,7 @@ def main():
 
     args = parser.parse_args()
 
-    # Se non viene passata nessuna opzione, mostra l'aiuto ed esce
+    #se non viene passata nessuna opzione, mostra l'aiuto ed esce
     if not any(vars(args).values()):
         parser.print_help()
         print(
@@ -138,7 +151,7 @@ def main():
         )
         sys.exit(0)
 
-    # --- ESECUZIONE OPZIONI PRECEDENTI ---
+    #esecuzione esercizio 3
     if args.mostra_rubrica:
         print("\n--- PUNTO 1: Contenuto formattato ---")
         for nome, dati in rubrica.items():
@@ -182,44 +195,41 @@ def main():
         else:
             print(f"Errore: Il nome '{args.nome}' non è presente in rubrica.")
 
-    # =========================================================================
-    # NUOVA OPZIONE: ESPORTAZIONE IN TXT
-    # =========================================================================
+
+    # Punto 1, esportazione in txt
     if args.esporta_txt:
         print("\n--- Generazione di rubrica.txt ---")
         try:
             with open("rubrica.txt", "w", encoding="utf-8") as f:
                 for nome, dati in rubrica.items():
-                    # Componiamo la riga inserendo il nome seguito dai valori interni separati da virgole
+                    #compongo la riga inserendo il nome seguito dai valori interni separati da virgole
                     linea = f"{nome}, {dati['giorno']}, {dati['mese']}, {dati['anno']}, {dati['età']}, {dati['sesso']}, {dati['mail']}\n"
                     f.write(linea)
             print("File 'rubrica.txt' creato con successo!")
         except Exception as e:
             print(f"Si è verificato un errore durante la scrittura: {e}")
 
-    # =========================================================================
-    # NUOVA OPZIONE: ESPORTAZIONE IN JSON
-    # =========================================================================
+
+    # Punto 2, esportazione in json
     if args.esporta_json:
         print("\n--- Generazione di rubrica.json ---")
         try:
             with open("rubrica.json", "w", encoding="utf-8") as f:
-                # Scriviamo il dizionario così com'è. indent=4 lo rende leggibile ad occhio nudo
+                #scrivo il dizionario così com'è, indent=4 lo rende leggibile
                 json.dump(rubrica, f, indent=4, ensure_ascii=False)
             print("File 'rubrica.json' creato correttamente!")
         except Exception as e:
             print(f"Si è verificato un errore durante il salvataggio JSON: {e}")
 
-    # =========================================================================
-    # NUOVA OPZIONE: LETTURA E VISUALIZZAZIONE DA JSON
-    # =========================================================================
+
+    # Punto 3, lettura del file json
     if args.leggi_json:
         print("\n--- Lettura e visualizzazione da rubrica.json ---")
         try:
             with open("rubrica.json", "r", encoding="utf-8") as f:
                 rubrica_caricata = json.load(f)
 
-            # Visualizziamo il contenuto del dizionario importato
+            #stampo il contenuto del dizionario importato
             print("Dati importati correttamente dal file JSON:")
             print(json.dumps(rubrica_caricata, indent=2, ensure_ascii=False))
         except FileNotFoundError:
@@ -232,6 +242,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-#rivedi tutto

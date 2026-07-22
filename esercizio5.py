@@ -74,17 +74,52 @@ def soluzione_ok(soluzione_posizioni):
     return True 
 
 
+import random
+import time 
+
+def main():
+    # inizializzo generatore permutazioni
+    random_generator = random.Random() 
+    
+    # preparo la "possibile soluzione" con posizoni da testare
+    scacchiera = list(range(8)) 
+    
+    # conto le soluzioni trovate, inizio da 0           
+    solutions = 0                 
+    
+    # misuro il tempo di partenza per la ricerca della soluzione
+    start_time = time.time()            
+    
+    # loop finchè non trovo una soluzione
+    while solutions < 1:
+    
+        # permutazione casuale della soluzione 'mescolando' posizioni
+        random_generator.shuffle(scacchiera) 
+        
+        # verifica se la permutazione casuale e' soluzione  
+        #if soluzione_ok(scacchiera) == True: 
+        if soluzione_ok(scacchiera): 
+            # se la soluzione è buona, scrive
+            print(f'Found solution {scacchiera} in {time.time() - start_time} s.')
+            
+            # incremento contatore soluzioni trovate (condizione stop loop)
+            solutions += 1      
+            
+            # reset timer ricerca soluzione
+            start_time = time.time()
+
+
+# chiamo la funzione principale, ho bloccato per non ottenere 11 soluzioni
+# main()
+
+
 #RISOLUZIONE PUNTO 1
 """
 Trovate 10 soluzioni per il gioco delle regine con il metodo delle permutazioni: quanto è il 
 tempo medio necessario a trovare una soluzione?
 """
 
-import random
-import time 
-
-
-def main():
+def main1():
     # inizializzo generatore permutazioni
     random_generator = random.Random() 
     
@@ -120,81 +155,19 @@ def main():
 
     #faccio media dei tempi
     contatore_tempo = time.time() - start_contatore_tempo
-    print(contatore_tempo/10)
+    print(f"Il tempo medio è {contatore_tempo/10}")
     #contatorediviso 10
 
 # chiamo la funzione principale 
-main()
+main1()
 
 
-#loop per dare 10 soluzioni ma messo prima while solution <1
-'''
-for sol in range(10):
-    main()
-'''
-
-
+#Risoluzione punto 2
 """
-def main():
-    # inizializzo generatore permutazioni
-    random_generator = random.Random()
-
-    # preparo la "possibile soluzione" con posizoni da testare
-    scacchiera = list(range(8))
-
-    # conto le soluzioni trovate, inizio da 0
-    solutions = 0
-
-    # Lista per memorizzare i tempi di calcolo di ciascuna soluzione
-    tempi_soluzioni = []
-
-    # Misuro il tempo di partenza assoluto
-    start_time = time.time()
-
-    # loop finchè non trovo 10 soluzioni
-    while solutions < 10:
-
-        # permutazione casuale della soluzione 'mescolando' posizioni
-        random_generator.shuffle(scacchiera)
-
-        # verifica se la permutazione casuale e' soluzione
-        if soluzione_ok(scacchiera):
-            # Calcolo il tempo impiegato per QUESTA specifica soluzione
-            ora = time.time()
-            tempo_singolo = ora - start_time
-            tempi_soluzioni.append(tempo_singolo)
-
-            # se la soluzione è buona, scrive
-            print(
-                f"Soluzione {solutions + 1}: {scacchiera} trovata in {tempo_singolo:.5f} secondi"
-            )
-
-            # incremento contatore soluzioni trovate (condizione stop loop)
-            solutions = solutions + 1
-
-            # reset timer per la ricerca della PROSSIMA soluzione
-            start_time = time.time()
-
-    print("-" * 60)
-    # Calcolo la media matematica dei tempi registrati nella lista
-    tempo_medio = sum(tempi_soluzioni) / len(tempi_soluzioni)
-
-    print(f"TEMPO MEDIO NECESSARIO A TROVARE UNA SOLUZIONE:")
-    print(f"-> {tempo_medio:.6f} secondi ({tempo_medio * 1000:.2f} millisecondi)")
-
-
-# chiamo la funzione principale
-if __name__ == "__main__":
-    main()
-
+Contate quanti tentativi fa il programma per trovare ogni soluzione del problema 8 regine
 """
 
-#tempo medio
-
-
-#punto 2
-
-def main():
+def main2():
     # Inizializzo generatore permutazioni
     random_generator = random.Random() 
     
@@ -204,118 +177,104 @@ def main():
     # Conto le soluzioni trovate, inizio da 0           
     solutions = 0                 
     
-    # --- PARTE NUOVA: CONTATORI PER I TENTATIVI ---
+    #imposto conteggio tentativi
     totale_tentativi_globali = 0
     tentativi_soluzione_corrente = 0
 
     print("Ricerca delle soluzioni e conteggio dei tentativi...\n")
 
-    # Loop finché non trovo 10 soluzioni
+    #loop finché non trovo 10 soluzioni
     while solutions < 10:
-        # Incrementiamo il contatore a ogni shuffle
+        #incremento il contatore a ogni shuffle
         tentativi_soluzione_corrente += 1
 
-        # Permutazione casuale della soluzione 'mescolando' posizioni
+        #permutazione casuale della soluzione 'mescolando' posizioni
         random_generator.shuffle(scacchiera) 
 
-        # Verifica se la permutazione casuale è soluzione  
+        #verifico se la permutazione casuale è soluzione  
         if soluzione_ok(scacchiera): 
             solutions = solutions + 1      
             
-            # Stampa del risultato con i tentativi della soluzione corrente
+            #stampo risultato con i tentativi della soluzione corrente
             print(f'Found solution {scacchiera} in {tentativi_soluzione_corrente} tentativi.')
-            
-            # Accumulo il conteggio parziale nel totale globale
-            totale_tentativi_globali += tentativi_soluzione_corrente
             
             # Reset del contatore per la prossima ricerca
             tentativi_soluzione_corrente = 0
 
-    # --- PARTE NUOVA: CALCOLO DELLA MEDIA FINALE ---
-    print("-" * 50)
-    media_tentativi = totale_tentativi_globali / 10
-    print(f"Media tentativi per soluzione: {media_tentativi:.1f}")
+# chiamo la funzione principale 
+main2()
 
 
+#RISOLUZIOEN PUNTO 3
+"""
+Alcune soluzioni possono essere ripetute: fate in modo che le soluzioni siano “uniche”
+"""
 
-
-#punto 3
-#Alcune soluzioni possono essere ripetute: fate in modo che le soluzioni siano “uniche”
-#ho foto di 14/4
-
-
-def main():
+def main3():
     # Inizializzo generatore permutazioni
     random_generator = random.Random() 
     
     # Preparo la "possibile soluzione" con posizioni da testare
     scacchiera = list(range(8)) 
     
-    # --- PARTE NUOVA: SET PER SOLUZIONI UNICHE E CONTATORI ---
+    #preparo set per soluzioni trovate
     soluzioni_trovate = set()
-    totale_tentativi_globali = 0
-    tentativi_soluzione_corrente = 0
 
     print("Ricerca di 10 soluzioni UNICHE e conteggio dei tentativi...\n")
 
-    # Il loop continua finché il set non contiene 10 elementi unici
+    #il loop continua finché il set non contiene 10 elementi unici
     while len(soluzioni_trovate) < 10:
-        # Incrementiamo il contatore a ogni shuffle
-        tentativi_soluzione_corrente += 1
 
-        # Permutazione casuale della soluzione
+        #permutazione casuale della soluzione
         random_generator.shuffle(scacchiera) 
 
-        # Trasformiamo la scacchiera in tupla per poterla controllare/inserire nel set
+        #trasformo la scacchiera in tupla per poterla controllare/inserire nel set
         configurazione_attuale = tuple(scacchiera)
 
-        # La soluzione è valida SOLO se passa il controllo E non è già stata trovata
+        #soluzione è valida solo se passa il controllo e non è già stata trovata
         if configurazione_attuale not in soluzioni_trovate and soluzione_ok(scacchiera): 
-            # Aggiungiamo la tupla al set delle soluzioni uniche
+            #aggiungmo la tupla al set delle soluzioni uniche
             soluzioni_trovate.add(configurazione_attuale)
             
-            # Stampa del risultato
-            print(f'Found unique solution {len(soluzioni_trovate)}: {scacchiera} in {tentativi_soluzione_corrente} tentativi.')
-            
-            # Accumulo nel totale globale e reset per la prossima ricerca
-            totale_tentativi_globali += tentativi_soluzione_corrente
-            tentativi_soluzione_corrente = 0
-
-    # Calcolo della media finale basata sulle 10 soluzioni uniche
-    print("-" * 50)
-    media_tentativi = totale_tentativi_globali / 10
-    print(f"Media tentativi per soluzione unica: {media_tentativi:.1f}")
+            #stampo risultato
+            print(f'Found unique solution {len(soluzioni_trovate)}: {scacchiera}')
 
 
+#chiamo la funzione principale 
+main3()
 
-#punto 4
 
-def main():
+#RISOLUZIONE PUNTO 4
+"""
+Se ci sono soluzioni ripetute, contate quante volte ogni soluzione è ripetuta
+"""
+
+def main4():
     # Inizializzo generatore permutazioni
     random_generator = random.Random() 
     
     # Preparo la "possibile soluzione" con posizioni da testare
     scacchiera = list(range(8)) 
     
-    # --- PARTE NUOVA: DIZIONARIO PER CONTARE LE RIPETIZIONI E CONTATORI ---
+    #preparo variabili e dizionario per ripetizioni
     frequenza_duplicati = {}
     totale_tentativi_globali = 0
     tentativi_soluzione_corrente = 0
 
     print("Ricerca di 10 soluzioni UNICHE e tracciamento dei duplicati...\n")
 
-    # Il loop continua finché non abbiamo 10 chiavi uniche nel dizionario
+    #il loop continua finché non abbiamo 10 chiavi uniche nel dizionario
     while len(frequenza_duplicati) < 10:
         tentativi_soluzione_corrente += 1
         random_generator.shuffle(scacchiera) 
 
-        # Trasformiamo in tupla per l'uso come chiave del dizionario
+        #trasformo in tupla per l'uso come chiave del dizionario
         configurazione_attuale = tuple(scacchiera)
 
-        # Se lo shuffle genera una configurazione che è una soluzione valida...
+        #se lo shuffle genera una configurazione che è una soluzione valida
         if soluzione_ok(scacchiera):
             
-            # CASO A: È una soluzione NUOVA (mai vista prima)
+            #se è soluzione nuova
             if configurazione_attuale not in frequenza_duplicati:
                 frequenza_duplicati[configurazione_attuale] = 1 # Inizializza il conteggio a 1 (la prima volta)
                 
@@ -324,35 +283,41 @@ def main():
                 totale_tentativi_globali += tentativi_soluzione_corrente
                 tentativi_soluzione_corrente = 0
             
-            # CASO B: È una soluzione RIPETUTA (era già nel dizionario)
+            #se è soluzione ripetuta (presente nel dizionario)
             else:
                 frequenza_duplicati[configurazione_attuale] += 1
                 print(f'   [Duplicato] La soluzione {list(configurazione_attuale)} è comparsa di nuovo! (Vista in totale: {frequenza_duplicati[configurazione_attuale]} volte)')
 
-    # --- PARTE NUOVA: RESOCONTO FINALE DEI DUPLICATI ---
+    #stampo resoconto dei duplicati
     print("-" * 50)
-    print("RESOCONTO FINALE DELLE RIPETIZIONI:")
+    print("Resoconto finale delle ripetizioni:")
     qualche_duplicato = False
     
+    #se ci sono stati duplicati
     for i, (soluzione, conteggio) in enumerate(frequenza_duplicati.items(), 1):
-        # Se il conteggio è maggiore di 1, significa che è stata ripetuta
+        #se il conteggio è maggiore di 1, significa che è stata ripetuta
         if conteggio > 1:
             qualche_duplicato = True
             print(f"Soluzione {i} {list(soluzione)} -> Ripetuta {conteggio - 1} volte extra (generata {conteggio} volte in totale)")
-            
+
+    #se non ci sono stati duplicati  
     if not qualche_duplicato:
-        print("Nessuna delle 10 soluzioni si è ripetuta durante questa esecuzione (sei stato fortunato!).")
+        print("Nessuna delle 10 soluzioni si è ripetuta durante questa esecuzione")
         
     print("-" * 50)
     media_tentativi = totale_tentativi_globali / 10
     print(f"Media tentativi per soluzione unica: {media_tentativi:.1f}")
 
+#chiamo la funzione principale 
+main4()
 
-#punto 5
 
-Python
+#RISOLUZIONE PUNTO 5
+"""
+Generalizzate il programma per risolvere una scacchiera di qualunque dimensione NxN
+"""
+
 import random
-
 
 def stessa_diagonale(x0, y0, x1, y1):
     """Ritorna Vero se posizioni (x0, y0) e (x1, y1) sono sulla stessa "diagonale" """
@@ -378,90 +343,96 @@ def soluzione_ok(soluzione_posizioni):
     return True
 
 
-def main():
-    # =========================================================================
-    # CONFIGURAZIONE DIMENSIONE SCACCHIERA (N)
-    # Modifica questo valore per cambiare la dimensione (es. 4, 6, 8, 10...)
-    # =========================================================================
-    N = 8
+def main5():
+    #chiedo lato scacchiera all'utente
+    N = int(input ("Che dimensione deve avere il lato della scacchiera?"))
 
-    random_generator = random.Random()
+    if N > 6 or N == 5:
 
-    # Genera la scacchiera dinamicamente in base a N
-    scacchiera = list(range(N))
+        random_generator = random.Random()
 
-    frequenza_duplicati = {}
-    totale_tentativi_globali = 0
-    tentativi_soluzione_corrente = 0
+        #genera la scacchiera dinamicamente in base a N
+        scacchiera = list(range(N))
 
-    print(
-        f"Ricerca di 10 soluzioni UNICHE per una scacchiera {N}x{N} e tracciamento duplicati...\n"
-    )
+        frequenza_duplicati = {}
+        totale_tentativi_globali = 0
+        tentativi_soluzione_corrente = 0
 
-    while len(frequenza_duplicati) < 10:
-        tentativi_soluzione_corrente += 1
-        random_generator.shuffle(scacchiera)
+        print(
+            f"Ricerca di 10 soluzioni UNICHE per una scacchiera {N}x{N} e tracciamento duplicati...\n"
+        )
 
-        configurazione_attuale = tuple(scacchiera)
+        while len(frequenza_duplicati) < 10:
+            tentativi_soluzione_corrente += 1
+            random_generator.shuffle(scacchiera)
 
-        if soluzione_ok(scacchiera):
+            configurazione_attuale = tuple(scacchiera)
 
-            # CASO A: Nuova soluzione
-            if configurazione_attuale not in frequenza_duplicati:
-                frequenza_duplicati[configurazione_attuale] = 1
+            if soluzione_ok(scacchiera):
 
+                #Nuova soluzione
+                if configurazione_attuale not in frequenza_duplicati:
+                    frequenza_duplicati[configurazione_attuale] = 1
+
+                    print(
+                        f"Found unique solution {len(frequenza_duplicati)}: {scacchiera} in {tentativi_soluzione_corrente} tentativi."
+                    )
+
+                    totale_tentativi_globali += tentativi_soluzione_corrente
+                    tentativi_soluzione_corrente = 0
+
+                #Soluzione ripetuta
+                else:
+                    frequenza_duplicati[configurazione_attuale] += 1
+                    print(
+                        f"   [Duplicato] La soluzione {list(configurazione_attuale)} è comparsa di nuovo! (Vista: {frequenza_duplicati[configurazione_attuale]} volte)"
+                    )
+
+        print("-" * 50)
+        print("Resoconto finale delle ripetizioni:")
+        qualche_duplicato = False
+
+        for i, (soluzione, conteggio) in enumerate(frequenza_duplicati.items(), 1):
+            if conteggio > 1:
+                qualche_duplicato = True
                 print(
-                    f"Found unique solution {len(frequenza_duplicati)}: {scacchiera} in {tentativi_soluzione_corrente} tentativi."
+                    f"Soluzione {i} {list(soluzione)} -> Ripetuta {conteggio - 1} volte extra"
                 )
 
-                totale_tentativi_globali += tentativi_soluzione_corrente
-                tentativi_soluzione_corrente = 0
+        if not qualche_duplicato:
+            print("Nessuna soluzione si è ripetuta in questa esecuzione.")
 
-            # CASO B: Soluzione ripetuta
-            else:
-                frequenza_duplicati[configurazione_attuale] += 1
-                print(
-                    f"   [Duplicato] La soluzione {list(configurazione_attuale)} è comparsa di nuovo! (Vista: {frequenza_duplicati[configurazione_attuale]} volte)"
-                )
+        print("-" * 50)
+        media_tentativi = totale_tentativi_globali / 10
+        print(f"Media tentativi per soluzione unica: {media_tentativi:.1f}")
 
-    print("-" * 50)
-    print("RESOCONTO FINALE DELLE RIPETIZIONI:")
-    qualche_duplicato = False
-
-    for i, (soluzione, conteggio) in enumerate(frequenza_duplicati.items(), 1):
-        if conteggio > 1:
-            qualche_duplicato = True
-            print(
-                f"Soluzione {i} {list(soluzione)} -> Ripetuta {conteggio - 1} volte extra"
-            )
-
-    if not qualche_duplicato:
-        print("Nessuna soluzione si è ripetuta in questa esecuzione.")
-
-    print("-" * 50)
-    media_tentativi = totale_tentativi_globali / 10
-    print(f"Media tentativi per soluzione unica: {media_tentativi:.1f}")
-
+    #dimensione (N)Soluzioni Uniche solo se N diverso da 1, 2, 3, 4, 6
+    else:
+        print(f"Una schacchiera a lato {N} non ha 10 soluzioni")
 
 if __name__ == "__main__":
-    main()
+    main5()
 
 
-
-
-
-#punto 6
+#RISOLUZIONE PUNTO 6
+"""
+Trovate quale è la scacchiera con lato N più grande possibile per cui si riesce a trovare 1 
+soluzione in meno di 15s
+"""
 
 import random
-import sys
 import time
 
 
 def stessa_diagonale(x0, y0, x1, y1):
+    """Ritorna Vero se posizioni (x0, y0) e (x1, y1) sono sulla stessa "diagonale" """
     return abs(y1 - y0) == abs(x1 - x0)
 
 
 def incrocia_colonne(posizioni, col):
+    """Ritorna Vero se la colonna 'col' incrocia la diagonale di qualcuna
+    delle posizioni delle regine precedenti
+    """
     for c in range(col):
         if stessa_diagonale(c, posizioni[c], col, posizioni[col]):
             return True
@@ -469,57 +440,94 @@ def incrocia_colonne(posizioni, col):
 
 
 def soluzione_ok(soluzione_posizioni):
+    """Controlla tutte le posizioni della possibile soluzione"""
     for col in range(1, len(soluzione_posizioni)):
         if incrocia_colonne(soluzione_posizioni, col):
             return False
     return True
 
 
-def main():
-    # MODIFICA QUESTO VALORE PER TESTARE IL LIMITE (PROVA 12, 13 E 14)
-    N = 13
-
-    random_generator = random.Random()
+def trova_soluzione_con_timeout(N, max_secondi=15.0):
+    """Cerca 1 soluzione per una scacchiera NxN.
+    Si interrompe se supera max_secondi. Ritorna una tupla: (trovata: bool,
+    tempo_impiegato: float, tentativi: int)
+    """
     scacchiera = list(range(N))
     tentativi = 0
-
-    print(f"Tentativo di risoluzione per N = {N} con limite di 15 secondi...")
-
-    start_time = time.time()
+    inizio = time.time()
 
     while True:
-        tentativi += 1
+        tempo_trascorso = time.time() - inizio
 
         # Controllo timeout
-        elapsed_time = time.time() - start_time
-        if elapsed_time > 15.0:
+        if tempo_trascorso > max_secondi:
+            return False, tempo_trascorso, tentativi
+
+        tentativi += 1
+        random.shuffle(scacchiera)
+
+        if soluzione_ok(scacchiera):
+            return True, tempo_trascorso, tentativi
+
+
+def main6():
+    print(
+        " Ricerca della dimensione N massima risolvibile entro 15 secondi \n"
+    )
+
+    #scacchiere N < 4 o N = 6 non sono un problema qui perché cerchiamo SOLO 1 soluzione (per N=4 bastano 2 sol. esistenti)
+    N = 4
+    ultimo_N_valido = None
+
+    while True:
+        # Per N=2 e N=3 non esistono soluzioni matematiche, le saltiamo
+        if N in (2, 3):
+            N += 1
+            continue
+
+        print(f"Testing N = {N}...", end=" ", flush=True)
+
+        trovata, tempo, tentativi = trova_soluzione_con_timeout(
+            N, max_secondi=15.0
+        )
+
+        if trovata:
             print(
-                f"\n[TIMEOUT] Tempo scaduto! Raggiunti 15 secondi dopo {tentativi} tentativi senza trovare soluzioni."
+                f"✓ SOLUZIONE TROVATA in {tempo:.2f}s ({tentativi:,} tentativi)"
+            )
+            ultimo_N_valido = N
+            N += 1
+        else:
+            print(
+                f"✗ TIMEOUT (> 15.0s) dopo {tentativi:,} tentativi effettuati."
             )
             break
 
-        random_generator.shuffle(scacchiera)
-
-        if soluzione_ok(scacchiera):
-            print(f"\n[SUCCESSO] Soluzione trovata per N = {N}!")
-            print(f"Configurazione: {scacchiera}")
-            print(f"Tempo impiegato: {elapsed_time:.3f} secondi")
-            print(f"Tentativi necessari: {tentativi}")
-            break
-
+    print("\n" + "=" * 50)
+    if ultimo_N_valido:
+        print(
+            f"RISULTATO FINALE: La dimensione massima N per cui si trova 1 soluzione in meno di 15s è: N = {ultimo_N_valido}"
+        )
+    else:
+        print("Nessuna dimensione testata è riuscita a completarsi entro 15s.")
+    print("=" * 50)
 
 if __name__ == "__main__":
-    main()
+    main6()
 
+
+#RISOLUZIONE PUNTO 7
 """
-La dimensione massima del lato $N$ per trovare una soluzione in meno di 15 secondi è 
-$N = 12$ o $N = 13$ (a seconda della potenza di calcolo della CPU e della fortuna nei lanci).
+Ogni soluzione è ‘simmetrica’ per rotazioni della scacchiera 8x8 di 90, 180 e 270 gradi. 
+Scrivete delle funzioni che, una volta trovata una soluzione alla scacchiera, costruiscano 
+le 4 soluzioni simmetriche per rotazione. Trovate 5 soluzioni “uniche” e le rispettive 
+soluzioni simmetriche per rotazione per una scacchiera 8x8
 """
 
-#punto 7
-
+#simmetria rotazione 90°
 def ruota_90(soluzione):
     """Ruota la configurazione di 90 gradi in senso orario."""
+
     N = len(soluzione)
     nuova = [0] * N
     for x in range(N):
@@ -529,9 +537,10 @@ def ruota_90(soluzione):
         nuova[y] = N - 1 - x
     return nuova
 
-
+#simmetria rotazione 180°
 def ruota_180(soluzione):
     """Ruota la configurazione di 180 gradi."""
+
     N = len(soluzione)
     nuova = [0] * N
     for x in range(N):
@@ -539,9 +548,10 @@ def ruota_180(soluzione):
         nuova[N - 1 - x] = N - 1 - y
     return nuova
 
-
+#simmetria rotazione 270°
 def ruota_270(soluzione):
     """Ruota la configurazione di 270 gradi in senso orario."""
+
     N = len(soluzione)
     nuova = [0] * N
     for x in range(N):
@@ -549,10 +559,9 @@ def ruota_270(soluzione):
         nuova[N - 1 - y] = x
     return nuova
 
-
+#stampa le 4 simmetrie di una soluzione
 def ottieni_rotazioni(soluzione):
     """Ritorna una lista contenente le 4 rotazioni (0, 90, 180, 270 gradi)
-
     sotto forma di tuple.
     """
     r0 = tuple(soluzione)
@@ -562,33 +571,34 @@ def ottieni_rotazioni(soluzione):
     return [r0, r90, r180, r270]
 
 
-def main():
+def main7():
     random_generator = random.Random()
     scacchiera = list(range(8))
 
-    # Insieme che conterrà TUTTE le varianti (originarie e ruotate) per evitare ripetizioni
+    #set di tutte le varianti (originarie e ruotate) per evitare ripetizioni
     tutte_le_simmetrie = set()
 
-    # Contatore delle soluzioni fondamentali distinte trovate
+    #contatore delle soluzioni fondamentali distinte trovate
     soluzioni_fondamentali = 0
 
     print(
         "Ricerca di 5 soluzioni uniche e generazione delle loro simmetrie...\n"
     )
 
+    #ciclo finchè non si ha 5 soluzioni
     while soluzioni_fondamentali < 5:
         random_generator.shuffle(scacchiera)
 
         configurazione_attuale = tuple(scacchiera)
 
-        # La soluzione è valida solo se non è un doppione geometrico di una già vista
+        #soluzione valida solo se non è un doppione geometrico di una già vista
         if (
             configurazione_attuale not in tutte_le_simmetrie
             and soluzione_ok(scacchiera)
         ):
             soluzioni_fondamentali += 1
 
-            # Calcoliamo la famiglia completa delle 4 rotazioni
+            #calcolo la famiglia completa delle 4 rotazioni
             rotazioni = ottieni_rotazioni(scacchiera)
 
             print(f"=== SOLUZIONE FONDAMENTALE {soluzioni_fondamentali} ===")
@@ -597,13 +607,10 @@ def main():
             print(f"  180° (Simmetrica):  {list(rotazioni[2])}")
             print(f"  270° (Antiorario):  {list(rotazioni[3])}\n")
 
-            # Aggiungiamo tutte e 4 le varianti al set di controllo
+            #aggiungo tutte e 4 le varianti al set di controllo
             for r in rotazioni:
                 tutte_le_simmetrie.add(r)
 
 
 if __name__ == "__main__":
-    main()
-
-
-
+    main7()

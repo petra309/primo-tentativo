@@ -123,6 +123,8 @@ Utilizzando argv passate in input al vostro programma una chiave [giorno, mese, 
 mail] e visualizzate tutto il contenuto della rubrica (valori) che corrispondono a questa chiave
 """
 
+#per testare 6 e 7 togliere 5
+"""
 import sys
 
 #controllo che l'argomento venga dato
@@ -149,7 +151,8 @@ print(f"--- Valori corrispondenti alla chiave '{chiave_cercata}' ---")
 for nome, dati in rubrica.items():
     valore = dati[chiave_cercata]
     print(f"{nome}: {valore}")
-    
+"""
+
     
 #RISOLUZIONE PUNTO 6
 """
@@ -172,6 +175,10 @@ parser.add_argument(
 
 # parse_known_args impedisce ad argparse di andare in errore se sono presenti altri argomenti di sys.argv
 args, _ = parser.parse_known_args()
+
+def genera_messaggio(nome, dati) :
+    print(f"Car{desinenza} {nome}, sei nat{desinenza} il {dati['giorno']} di {dati['mese']} del {dati['anno']} "
+          f"e quindi a breve compirai {dati['età']} anni. Ti manderemo gli auguri a {dati['mail']}\n")
 
 #ciclo per stampare il messaggio
 if args.nome:
@@ -214,6 +221,8 @@ def punto_3():
     """PUNTO 3: Inversione dell'ordine della lista delle età."""
     print("=== PUNTO 3: Lista età invertita ===")
     
+    lista_età = sorted([dati['età'] for dati in rubrica.values()])
+
     lista_età_inversa = sorted(lista_età, reverse=True)
     
     nomi_invertiti = sorted(rubrica, key=lambda nome: rubrica[nome]['età'], reverse=True)
@@ -316,15 +325,16 @@ if __name__ == '__main__':
         punto_5(args.p5)
         print()
 
+"""
+# 1. Vedere l'aiuto con le opzioni disponibili
+python esercizio3.py --help
 
+# 2. Eseguire il Punto 1 e il Punto 2 insieme
+python esercizio3.py --p1 --p2
 
+# 3. Eseguire il Punto 5 cercando solo le email
+python esercizio3.py --chiave mail
 
-
-
-
-
-
-#rivedi 1 6
-# Esegue solo il Punto 2
-#python esercizio_3.py --lista_ordinata
-#rivedi come chiedere
+# 4. Eseguire il Punto 6 fornendo un nome specifico
+python esercizio3.py --nome "Madoka Ayukawa"
+"""
