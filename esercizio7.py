@@ -1,4 +1,20 @@
-#creo generatore 1 punto
+'''
+#
+# File: esercizio5.py
+#
+# Author: Petra Zurini
+#
+# Date: 20/07/2026
+#
+# Version: 1.0
+#
+# Description: Programma risolutivo dell'esercizio 7, lezione 11
+#
+'''
+
+#RISOLUZIONE PUNTO 1
+
+#creo generatore 
 def generatore_tabellina(numero):
     """generatore infinito di multipli di 'numero'"""
     n=0

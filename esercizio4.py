@@ -1,10 +1,29 @@
+'''
+#
+# File: esercizio4.py
+#
+# Author: Petra Zurini
+#
+# Date: 20/07/2026
+#
+# Version: 1.0
+#
+# Description: Programma risolutivo dell'esercizio 4, lezione 6
+#
+'''
+
+#importo ciò che mi servirà
 import argparse
 import json
 import sys
 
-#mi ha ricopiato anche es 3, quindi togli o vedi come chiamare da altro file se serve
 
-
+#RISOLUZIONE PUNTO 1
+"""
+Partendo dall’esercizio 3, aggiungete una opzione al programma per generare un file di testo 
+rubrica.txt contenente tutti gli elmenti della rubrica, uno per linea, con tutte le informazioni 
+separate da virgole. 
+"""
 
 # Il dizionario di partenza della rubrica
 rubrica = {
@@ -42,7 +61,7 @@ rubrica = {
     },
 }
 
-
+#funzione usata nel main
 def stampa_messaggio_auguri(nome, dati):
     desinenza = "o" if dati["sesso"] == "M" else "a"
     print(
@@ -79,7 +98,7 @@ def main():
         help="Punto 4: Auguri a tutti i membri",
     )
 
-    # Nuove opzioni richieste per file TXT e JSON
+    #nuove opzioni richieste per file TXT e JSON
     parser.add_argument(
         "--esporta_txt",
         action="store_true",
@@ -213,3 +232,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#rivedi tutto

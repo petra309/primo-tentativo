@@ -1,3 +1,18 @@
+'''
+#
+# File: esercizio5.py
+#
+# Author: Petra Zurini
+#
+# Date: 20/07/2026
+#
+# Version: 1.0
+#
+# Description: Programma risolutivo dell'esercizio 5, lezione 7
+#
+'''
+
+#riporto il file per esegiure l'esercizio
 #
 # File: Otto_regine.py
 #
@@ -10,7 +25,6 @@
 # Description: Example program to solve 8 queen-like problem 
 #              using brute force + random approach
 #
-
 
 def stessa_diagonale(x0, y0, x1, y1):
     '''Ritorna Vero se posizioni (x0, y0) e (x1, y1) sono sulla stessa "diagonale"
@@ -60,10 +74,12 @@ def soluzione_ok(soluzione_posizioni):
     return True 
 
 
-
-
-
+#RISOLUZIONE PUNTO 1
 """
+Trovate 10 soluzioni per il gioco delle regine con il metodo delle permutazioni: quanto è il 
+tempo medio necessario a trovare una soluzione?
+"""
+
 import random
 import time 
 
@@ -109,9 +125,8 @@ def main():
 
 # chiamo la funzione principale 
 main()
-"""
 
-#punto 1 
+
 #loop per dare 10 soluzioni ma messo prima while solution <1
 '''
 for sol in range(10):
@@ -119,27 +134,7 @@ for sol in range(10):
 '''
 
 
-
-import random
-import time
-
-def soluzione_ok(soluzione_posizioni):
-    """Controlla tutte le posizioni della possibile soluzione
-    'soluzione_posizioni' per verificare se ognuna delle posizioni
-    (colonne dela permatazione) ogni colonna incrocia la diagonale
-    di some qualcun altra posizione
-    """
-    for col in range(1, len(soluzione_posizioni)):
-        # verifica se incrocia
-        if incrocia_colonne(soluzione_posizioni, col):
-            # stop se trova incroci, la soluzione non è valida
-            return False
-
-    # Se non è ritornato prima,
-    # allora nessun incrocio trvato: posizioni della soluzione valide
-    return True
-
-
+"""
 def main():
     # inizializzo generatore permutazioni
     random_generator = random.Random()
@@ -192,7 +187,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-
+"""
 
 #tempo medio
 
