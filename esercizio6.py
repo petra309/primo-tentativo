@@ -24,41 +24,6 @@ non viene indicata la stringa “EXIT”
 from rubrica_esercizio6 import Rubrica
 
 #dizionario dell'esercizio 3
-dati_iniziali ={
-    'Paolino Paperino': {
-        'giorno': 9,
-        'mese': 'giugno',
-        'anno': 1934,
-        'età': 93,
-        'sesso': 'M',
-        'mail': 'paolino.paperin0@disney.org',
-    },
-    'Ron Weasley': {
-        'giorno': 1,
-        'mese': 'marzo',
-        'anno': 1980,
-        'età': 46,
-        'sesso': 'M',
-        'mail': 'ron_weasley80@hogwards.uk',
-    },
-    'Ramona Flowers': {
-        'giorno': 19,
-        'mese': 'ottobre',
-        'anno': 2004,
-        'età': 22,
-        'sesso': 'F',
-        'mail': 'ramona.fls@gmail.com',
-    },
-    'Madoka Ayukawa': {
-        'giorno': 25,
-        'mese': 'maggio',
-        'anno': 1969,
-        'età': 57,
-        'sesso': 'F',
-        'mail': 'madoka_sax@asahi_net.jp',
-    },
-}
-
 rubrica_iniziale = {
     'Paolino Paperino': {
         'giorno': 9,
@@ -152,9 +117,9 @@ def main():
                 )
 
         elif scelta == 'AGGIUNGI':
-            #se la rubrica non è aperta, la validazione dentro il metodo mostrerà il messaggio d'errore richiesto
-            if not rubrica.is_aperta:
-                rubrica.aggiungi('', 0, '', 0, 0, '', '')
+            #controllo che sia aperta la rubrica
+            if not rubrica.is_aperta and scelta in ['AGGIUNGI']:
+                print("Prima devi aprire o inizializzare una rubrica!")
                 continue
 
             print("\n--- Inserisci i dati del nuovo contatto ---")
@@ -174,18 +139,30 @@ def main():
                 )
 
         elif scelta == 'RIMUOVI':
+            #controllo che sia aperta la rubrica
+            if not rubrica.is_aperta and scelta in ['RIMUOVI']:
+                print("Prima devi aprire o inizializzare una rubrica!")
+                continue
             nome = input(
                 "Inserisci il NOME del contatto da rimuovere: "
             ).strip()
             rubrica.rimuovi(nome)
 
         elif scelta == 'STAMPA':
+            #controllo che sia aperta la rubrica
+            if not rubrica.is_aperta and scelta in ['STAMPA']:
+                print("Prima devi aprire o inizializzare una rubrica!")
+                continue
             nome = input(
                 "Inserisci il NOME del contatto da stampare: "
             ).strip()
             rubrica.stampa_contatto(nome)
 
         elif scelta == 'SALVA':
+            #controllo che sia aperta la rubrica
+            if not rubrica.is_aperta and scelta in ['SALVA']:
+                print("Prima devi aprire o inizializzare una rubrica!")
+                continue
             #chiedo all'utente come salvare il file
             filepath = input(
                 "Inserisci il nome del file su cui salvare (es. rubrica.json o rubrica.txt): "
