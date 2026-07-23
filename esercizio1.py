@@ -189,9 +189,5 @@ def main():
     else:
         print("Nessun numero è stato analizzato.")
 
-
 #eseguo main()
 main()
-
-#rivedi def ricerca lista che stanpa troppe volte non trovato e 
-#generatore stampa frase sbagliata

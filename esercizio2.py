@@ -328,7 +328,3 @@ for carattere in testo.lower():
 print("Mappatura dei soli caratteri alfanumerici (case-insensitive):\n")
 for chiave, valore in sorted(mappa_alfanumerici.items()):
     print(f"Carattere '{chiave}' -> Occorrenze: {valore}")
-
-
-
-# 9 più facile ???

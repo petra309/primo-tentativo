@@ -162,6 +162,7 @@ solo per il nome indicato)
 """
 
 import argparse
+import sys
 
 #costruisco oggetto ArgumentParser e lo assegno alla variabilie parser
 parser = argparse.ArgumentParser(
@@ -326,6 +327,7 @@ if __name__ == '__main__':
         print()
 
 """
+come eseguire effettivamente
 # 1. Vedere l'aiuto con le opzioni disponibili
 python esercizio3.py --help
 
